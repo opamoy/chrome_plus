@@ -1,0 +1,35 @@
+name: Auto Pull Chrome Plus Repository
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天午夜运行一次
+  workflow_dispatch: # 手动触发工作流
+
+jobs:
+  auto-pull:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout this repository
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Add remote repository
+        run: |
+          git remote add chrome_plus https://github.com/Bush2021/chrome_plus.git
+          git fetch chrome_plus
+
+      - name: Pull latest changes from chrome_plus main branch
+        run: |
+          git checkout main
+          git pull chrome_plus main
+
+      - name: Push changes to this repository
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push origin main
