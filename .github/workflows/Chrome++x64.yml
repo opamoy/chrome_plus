@@ -1,4 +1,4 @@
-name: Build Chrome++x64
+name: Chrome++x64
 
 on:
   release:
@@ -8,9 +8,8 @@ jobs:
   build:
     strategy:
       matrix:
-        include: [
-          { name: Chrome++_x64, arch: x64 },
-        ]
+        include: 
+           name: Chrome++_x64, arch: x64
 
     name: ${{ matrix.name }}
 
