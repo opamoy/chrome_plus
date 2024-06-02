@@ -27,7 +27,7 @@ jobs:
       - name: Pull latest changes from chrome_plus main branch
         run: |
           git checkout main
-          git pull chrome_plus main
+          git pull chrome_plus main --allow-unrelated-histories
 
       - name: Push changes to this repository
         env:
